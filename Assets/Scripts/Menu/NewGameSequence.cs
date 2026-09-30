@@ -15,6 +15,7 @@ public class NewGameSequence : MonoBehaviour {
         spriteFade.StartFade();
         canvasFade.StartFade();
         StartCoroutine(Sequence(night));
+
     }
 
     private IEnumerator Sequence(int night) {

@@ -16,16 +16,31 @@ public class SpriteFade : MonoBehaviour {
     }
 
     void Update() {
+        
         if(!fading)
             return;
 
+        UpdateFade();
+
+    }
+
+    void UpdateFade() {
         timer += Time.deltaTime;
-        float alpha = Mathf.Lerp(1f, 0f, timer / fadeDuration);
 
-        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, alpha);
+        float alpha = Mathf.Lerp(
+            1f,
+            0f,
+            timer / fadeDuration
+        );
 
-        if(alpha <= 0f) {
+        sr.color = new Color(
+            sr.color.r,
+            sr.color.g,
+            sr.color.b,
+            alpha
+        );
+
+        if(alpha <= 0f)
             fading = false;
-        }
     }
 }
