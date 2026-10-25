@@ -26,6 +26,7 @@ public class SaveManager : MonoBehaviour {
         LoadGame();
     }
 
+
     void LoadGame() {
         if(!File.Exists(savePath)) {
             Data = new SaveData();
@@ -33,9 +34,19 @@ public class SaveManager : MonoBehaviour {
             return;
         }
 
-        string json = File.ReadAllText(savePath);
-        Data = JsonUtility.FromJson<SaveData>(json);
+        try {
+            string json = File.ReadAllText(savePath);
+            Data = JsonUtility.FromJson<SaveData>(json);
+        } catch(System.Exception e) {
+            Debug.LogWarning("Não foi possível carregar o save: " + e.Message);
+        }
+
+        if(Data == null) {
+            Data = new SaveData();
+            SaveGame();
+        }
     }
+
 
     void SaveGame() {
         string json = JsonUtility.ToJson(Data, true);
